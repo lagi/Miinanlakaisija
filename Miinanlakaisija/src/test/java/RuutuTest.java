@@ -56,6 +56,12 @@ public class RuutuTest {
     }
     
     @Test
+    public void settauksenJalkeenRuudussaMiina() {
+        ruutu.setMiina();
+        assertEquals(true, ruutu.ruudussaMiina());
+    }
+    
+    @Test
     public void miinanAsettaminenToimii() {
         ruutu.setMiina();
         assertEquals(true, ruutu.ruudussaMiina());

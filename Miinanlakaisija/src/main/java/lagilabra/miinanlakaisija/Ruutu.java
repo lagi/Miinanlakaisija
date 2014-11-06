@@ -29,4 +29,9 @@ public class Ruutu {
         return this.ruudussaMiina;
     }
     
+    @Override
+    public String toString() {
+        return "x: " + x + ", y: " + y + ", miina: " + ruudussaMiina;
+    }
+    
 }
