@@ -35,8 +35,7 @@
                 <configuration>
                     <instrumentation>
                         <includes>
-                            <include>Miinanlakaisija.logiikka/*.class</include>
-                            <include>Miinanlakaisija.tekoaly/*.class</include>
+                            <include>lagilabra.miinanlakaisija.*.class</include>
                         </includes>
                     </instrumentation>
                 </configuration>
@@ -48,12 +47,10 @@
                 <version>0.30</version>
                 <configuration>
                     <targetClasses>
-                        <param>Miinanlakaisija.logiikka.*</param>
-                        <param>Miinanlakaisija.tekoaly.*</param>
+                        <param>lagilabra.miinanlakaisija.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>Miinanlakaisija.logiikka.*</param>
-                        <param>Miinanlakaisija.tekoaly.*</param>
+                        <param>lagilabra.miinanlakaisija.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

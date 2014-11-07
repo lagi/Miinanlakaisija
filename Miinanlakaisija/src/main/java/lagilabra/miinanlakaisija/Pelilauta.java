@@ -20,6 +20,7 @@ public class Pelilauta {
         }
     }
     
+    
     public void luoMiinojenAsettajalista() {
         for (int i = 0; i < ruutujenMaara; i++) {
             satunnaislukulista.add(i);
