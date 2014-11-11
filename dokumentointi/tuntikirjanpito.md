@@ -15,3 +15,7 @@ Pelilaudan luominen valmis, toteutin miinojen arpomisen luomalla pelilaudan koko
 7.11.2014, aikaa käytetty noin 30min
 
 Pit-raportin generointi onnistui, pom.xml-tiedostosta piti muuttaa pari riviä. Päätin ohjaajan avustuksella kuitenkin tehdä pelilaudan 2-ulotteisella Arraylla, jonka teen ensi viikolla. Harmillisesti tuli tehtyä vähän turhaa työtä ArrayListin kanssa, mutta ainakin logiikka on minulla jo tiedossa, joten muutettavaa on vain itse taulukot ja niiden alustaminen.
+
+11.11.2014, aikaa käytetty noin 1,5h
+
+Pelilaudan luominen meni täysin uusiksi. Luovuin ArrayListin käytöstä ja toteutin laudan kaksiulotteisena taulukkona. Konstruktori on hieman sotkuinen, mutta ehkä voin senkin koodia hieman hioa. Kaikki toiminnot ovat kuitenkin melko suoraviivaisia. Ruutu-luokka muuttui nyt turhaksi, sillä uudessa toteutuksessa ruudut ovat vain Pelilauta-taulukon arvoja, -1 = miina, 0 = ei vierekkäisiä miinoja, 1 = yksi vierekkäinen miina jne. Ensi kerralla (todennäköisesti huomenna) toteutan ruutujen arvojen asettamisen edellä mainitun mukaisesti. Luovuin asetaMiinat()-metodissa satunnaislukulistan käytöstä, sillä se aiheutti ArrayIndexOutOfBounds-ongelmia. Nyt toteutettu ratkaisu on mielestäni paljon siistimpi ja kompaktimpi. Pelilauta alkaa kohta olla valmis ja voinkin alkaa jo miettiä itse pelin toteutusta ja graafista ulkoasua.
