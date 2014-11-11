@@ -7,6 +7,7 @@ package lagilabra.miinanlakaisija;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import lagilabra.miinanlakaisija.Pelilauta;
 import lagilabra.miinanlakaisija.Ruutu;
 import org.junit.After;
@@ -53,29 +54,25 @@ public class PelilautaTest {
     public void miinojaLuodaanOikeaMaara() {
         assertEquals(10, lauta.getMiinojenMaara());
     }
-    
+
     @Test
-    public void miinojenAsettajaListaLuotuOikein() {
-        lauta.luoMiinojenAsettajalista();
-        assertEquals(64, lauta.getMiinojenAsettajalista().size());
+    public void miinatAsetetaanOikein() {
+        lauta.asetaMiinat();
+        int laskuri = 0;
+        for (int i = 0; i < lauta.getSivunPituus(); i++) {
+            for (int j = 0; j < lauta.getSivunPituus(); j++) {
+                if (lauta.getPelilauta()[i][j] == -1) {
+                    laskuri++;
+                }
+            }
+        }
+        assertEquals(10, laskuri);
     }
 
 //    @Test
-//    public void miinojaAsetetaanOikeaMaara() {
-//        lauta.asetaMiinat();
-//        ArrayList<Integer> miinat = new ArrayList<>();
-//        ArrayList<Ruutu> apu = lauta.getPelilauta();
-//        for (int i = 0; i < lauta.getRuutujenMaara(); i++) {
-//            if (apu.get(i).ruudussaMiina()) {
-//                miinat.add(i);
-//            }
-//        }
-//        assertEquals(10, miinat.size());
+//    public void konstruktoriTekeePelilaudanOikein() {
+//        lauta = new Pelilauta(2);
+//        assertEquals("[[0,0], [0,1], [1,0], [1,1]]", lauta.getPelilaudanSisalto());
 //    }
-
-    @Test
-    public void konstruktoriTekeePelilaudanOikein() {
-        lauta = new Pelilauta(2);
-        assertEquals("[x: 0, y: 0, miina: false, x: 0, y: 1, miina: false, x: 1, y: 0, miina: false, x: 1, y: 1, miina: false]", lauta.getPelilaudanSisalto());
-    }
+    
 }
