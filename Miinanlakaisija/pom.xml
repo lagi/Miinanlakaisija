@@ -34,9 +34,9 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <configuration>
                     <instrumentation>
-                        <includes>
-                            <include>lagilabra.miinanlakaisija.*.class</include>
-                        </includes>
+                        <!--<includes>
+                            <include>lagilabra/*.class</include>
+                        </includes>-->
                     </instrumentation>
                 </configuration>
                 <version>2.6</version>

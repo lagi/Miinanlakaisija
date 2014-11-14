@@ -1,26 +1,11 @@
 package lagilabra.miinanlakaisija;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.util.ArrayList;
-import java.util.Collections;
 import lagilabra.miinanlakaisija.Pelilauta;
-import lagilabra.miinanlakaisija.Ruutu;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author jaakkojo
- */
 public class PelilautaTest {
 
     Pelilauta lauta;
@@ -28,21 +13,9 @@ public class PelilautaTest {
     public PelilautaTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         lauta = new Pelilauta(8);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test
@@ -69,10 +42,49 @@ public class PelilautaTest {
         assertEquals(10, laskuri);
     }
 
-//    @Test
-//    public void konstruktoriTekeePelilaudanOikein() {
-//        lauta = new Pelilauta(2);
-//        assertEquals("[[0,0], [0,1], [1,0], [1,1]]", lauta.getPelilaudanSisalto());
-//    }
-    
+    @Test
+    public void ruutujenArvotAsetetaanOikein() {
+        lauta.pelilauta[7][7] = -1;
+        lauta.pelilauta[4][4] = -1;
+        lauta.alustaLauta();
+        boolean oikein = true;
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (!(i == 0 && j == 0) && lauta.pelilauta[4 + i][4 + j] != 1) {
+                    oikein = false;
+                }
+            }
+        }
+        assertEquals(true, oikein);
+    }
+
+    @Test
+    public void vierekkaistenRuutujenArvotAsetetaanOikein() {
+        lauta.pelilauta[0][0] = -1;
+        lauta.pelilauta[1][0] = -1;
+        lauta.pelilauta[2][0] = -1;
+        lauta.alustaLauta();
+        boolean apu = true;
+        if (lauta.pelilauta[1][1] != 3 || lauta.pelilauta[0][1] != 2 || lauta.pelilauta[2][1] != 2) {
+            apu = false;
+        }
+        assertEquals(true, apu);
+    }
+
+    @Test
+    public void josRuudussaOnMiinaSenArvoEiMuutu() {
+        lauta.pelilauta[1][1] = -1;
+        lauta.pelilauta[1][2] = -1;
+        lauta.alustaLauta();
+        boolean oikein = true;
+        if (lauta.pelilauta[1][1] != -1 || lauta.pelilauta[1][2] != -1) {
+            oikein = false;
+        }
+        assertEquals(true, oikein);
+    }
+
+    @Test
+    public void rajojenSisallaToimii() {
+        assertEquals(false, lauta.rajojenSisalla(8, 8));
+    }
 }
