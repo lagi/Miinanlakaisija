@@ -26,4 +26,8 @@ Arvojen asettaminen ruuduille osoittautuikin astetta hankalammaksi tehtäväksi.
 
 ## 14.11.2014, aikaa käytetty noin 4h
 
-Huomasin pienen ongelman alustaLauta()-metodissa. Jos miinan sisältävän ruudun vieressä oli miinan sisältävä ruutu, niin tällöin miinan sisältävän ruudun arvoa kasvatettiin yhdellä, mikä ei tietenkään ole suotavaa. Sain ongelman korjattua ja tein tapaukselle testin. Heitin myös try-catchin menemään ja tein oman metodin, joka tarkistaa ovatko annetut koordinaatit laudalla. 
+Huomasin pienen ongelman alustaLauta()-metodissa. Jos miinan sisältävän ruudun vieressä oli miinan sisältävä ruutu, niin tällöin miinan sisältävän ruudun arvoa kasvatettiin yhdellä, mikä ei tietenkään ole suotavaa. Sain ongelman korjattua ja tein tapaukselle testin. Heitin myös try-catchin menemään ja tein oman metodin, joka tarkistaa ovatko annetut koordinaatit laudalla. Lisäsin checkstylen projektiini ja tutkin jo hieman grafiikan toteuttamista. Siitä kuitenkin lisää varmasti ensi viikolla. Luokkakaaviota muokkasin myös hieman, se ei tosin ole kauhean mielenkiintoisen näköinen. Sekvenssikaaviot varmasti kertovat ohjelman toiminnasta paljon enemmän.
+
+## 21.11.2014, aikaa käytetty noin 2,5h
+
+Graafisen käyttöliittymän koodaaminen aloitettu. Grafiikan koodaaminen oli minulle aluksi hieman hidasta, sillä ainoat guit olen tehnyt ohjelmoinnin jatkokurssilla kaksi vuotta sitten. Myös ohjelman lopullinen runko alkaa muototua: lisäsin luokat MiinanlakaisijaUI ja Sovellus, joista jälkimmäinen on pääohjelma.
