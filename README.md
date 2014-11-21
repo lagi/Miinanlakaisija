@@ -1,4 +1,3 @@
 Miinanlakaisija
 ===============
-jotakin
-lisää jotakin
+Kolmivaikeustasoinen miinanlöytöpeli.
