@@ -31,3 +31,7 @@ Huomasin pienen ongelman alustaLauta()-metodissa. Jos miinan sisältävän ruudu
 ## 21.11.2014, aikaa käytetty noin 2,5h
 
 Graafisen käyttöliittymän koodaaminen aloitettu. Grafiikan koodaaminen oli minulle aluksi hieman hidasta, sillä ainoat guit olen tehnyt ohjelmoinnin jatkokurssilla kaksi vuotta sitten. Myös ohjelman lopullinen runko alkaa muototua: lisäsin luokat MiinanlakaisijaUI ja Sovellus, joista jälkimmäinen on pääohjelma. Tein myös testit Peli-luokalle ja rivikattavuus onkin jo 100%, joskin testien laatua voi vielä hieman hioa.
+
+## 28.11.2014, aikaa käytetty noin 3h
+
+Graafinen käyttöliittymä edistyy. Pelilauta alkaa olla valmis, paitsi jostain syystä 8x8-laudalle ilmestyy 20 miinaa 10 sijasta, bugin syytä tutkitaan. Myös pieniä visible-ongelmia pelilaudassa. Logiikka vielä vähän kesken ja vaikeusasteen valitseminen puuttuu.
