@@ -26,7 +26,7 @@ public class PeliTest {
     
     @Before
     public void setUp() {
-        peli = new Peli("helppo");
+        peli = new Peli(8);
     }
 
     @Test
@@ -42,26 +42,26 @@ public class PeliTest {
 
     @Test
     public void keskivaikeaVaikeustasoToimii() {
-        peli = new Peli("keskivaikea");
+        peli = new Peli(16);
         assertEquals(256, peli.getPelilauta().getRuutujenMaara());
     }
         
     @Test
     public void aloitaPeliAsettaaOikeanMaaranMiinojaKeskivaikea() {
-        peli = new Peli("keskivaikea");
+        peli = new Peli(16);
         peli.aloita(0, 0);
         assertEquals(40, peli.getPelilauta().getMiinojenMaara());
     }
     
     @Test
     public void vaikeaVaikeustasoToimii() {
-        peli = new Peli("vaikea");
+        peli = new Peli(24);
         assertEquals(576, peli.getPelilauta().getRuutujenMaara());
     }
         
     @Test
     public void aloitaPeliAsettaaOikeanMaaranMiinojaVaikea() {
-        peli = new Peli("vaikea");
+        peli = new Peli(24);
         peli.aloita(0, 0);
         assertEquals(90, peli.getPelilauta().getMiinojenMaara());
     }

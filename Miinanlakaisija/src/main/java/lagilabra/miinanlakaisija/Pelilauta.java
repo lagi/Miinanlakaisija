@@ -103,4 +103,8 @@ public class Pelilauta {
     public int getSivunPituus() {
         return laudanSivunPituus;
     }
+
+    public boolean lopetus() {
+        return true;
+    }
 }

@@ -2,23 +2,35 @@ package lagilabra.miinanlakaisija;
 
 public class Peli {
 
-    Pelilauta lauta;
+    private Pelilauta lauta;
+    private long aloitusAika;
+    private long lopetusAika;
 
-    public Peli(String vaikeustaso) {
-        if (vaikeustaso.equals("helppo")) {
+    public Peli(int vaikeustaso) {
+        if (vaikeustaso == 8) {
             lauta = new Pelilauta(8);
-        } else if (vaikeustaso.equals("keskivaikea")) {
+        } else if (vaikeustaso == 16) {
             lauta = new Pelilauta(16);
-        } else if (vaikeustaso.equals("vaikea")) {
+        } else if (vaikeustaso == 24) {
             lauta = new Pelilauta(24);
         }
     }
 
     public void aloita(int x, int y) {
         lauta.aloitaPeli(x, y);
+        aloitusAika = System.currentTimeMillis();
+    }
+    
+    public void lopeta() {
+        
+        if(lauta.lopetus()) {
+            lopetusAika = System.currentTimeMillis();
+        }
     }
     
     public Pelilauta getPelilauta() {
         return lauta;
     }
+    
+    
 }
