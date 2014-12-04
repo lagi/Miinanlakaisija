@@ -35,3 +35,7 @@ Graafisen käyttöliittymän koodaaminen aloitettu. Grafiikan koodaaminen oli mi
 ## 28.11.2014, aikaa käytetty noin 3h
 
 Graafinen käyttöliittymä edistyy. Pelilauta alkaa olla valmis, paitsi jostain syystä 8x8-laudalle ilmestyy 20 miinaa 10 sijasta, bugin syytä tutkitaan. Myös pieniä visible-ongelmia pelilaudassa. Logiikka vielä vähän kesken ja vaikeusasteen valitseminen puuttuu.
+
+## 4.12.2014, aikaa käytetty noin 4h
+
+Peli alkaa olla valmis. Lisätty vaikeusasteen valinta ja pelin häviäminen miinaa klikattaessa. Lisätty myös mahdollisuus myös aloittaa peli uudelleen. Vielä puuttuvat pelin voittaminen ja nolla-arvoista ruutua painettaessa viereisten ruutujen rekursiivinen paljastaminen, kunnes päädytään ei-nolla-arvoiseen ruutuun.

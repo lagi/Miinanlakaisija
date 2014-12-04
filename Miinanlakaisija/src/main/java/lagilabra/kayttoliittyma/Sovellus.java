@@ -7,12 +7,12 @@ package lagilabra.kayttoliittyma;
 
 /**
  *
- * @author jaakkojo
+ * @author Jaakko Jokinen
  */
 public class Sovellus {
 
     public static void main(String[] args) {
-        MiinanlakaisijaUI sovellus = new MiinanlakaisijaUI(8);
+        MiinanlakaisijaUI sovellus = new MiinanlakaisijaUI();
         sovellus.run();
     }
 }

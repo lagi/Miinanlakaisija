@@ -38,8 +38,8 @@ public class Pelilauta {
      * luo kahdesti miinaa samaan ruutuun. Varmistetaan myös, että ensimmäisenä
      * klikatussa ruudussa ei voi olla miinaa.
      *
-     * @param ekaX ensimmäisenä klikatun ruudun x-koordinaatti
-     * @param ekaY ensimmäisenä klikatun ruudun y-koordinaatti
+     * @param ekaX: ensimmäisenä klikatun ruudun x-koordinaatti
+     * @param ekaY: ensimmäisenä klikatun ruudun y-koordinaatti
      *
      * @see Pelilauta#asetaYmparoivienRuutujenArvot(int, int)
      */
