@@ -1,17 +1,17 @@
 package lagilabra.miinanlakaisija;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Pelilauta {
 
-    private Random random = new Random();
-    private int[][] pelilauta;
-    private int ruutujenMaara;
-    private int miinojenMaara;
-    private int laudanSivunPituus;
+    private final Random random = new Random();
+    private final int[][] pelilauta;
+    private final int ruutujenMaara;
+    private final int miinojenMaara;
+    private final int laudanSivunPituus;
+    private HashSet<Koordinaatti> tyhjatNaapuritLista = new HashSet<>();
 
     /**
      * Konstruktorissa luodaan pelilauta-taulukko oikean kokoiseksi, lasketaan
@@ -88,6 +88,30 @@ public class Pelilauta {
         return !(x >= laudanSivunPituus || x < 0 || y >= laudanSivunPituus || y < 0);
     }
 
+    public void tyhjatNaapurit(int x, int y) {
+        if (!tyhjaRuutu(x, y)) {
+            return;
+        }
+        System.out.println(x + " " + y);
+        for (int i = -1; i < 2; i++) {
+            Koordinaatti tx = new Koordinaatti(x + i, y);
+            Koordinaatti ty = new Koordinaatti(x, y + i);
+            if (tyhjaRuutu(x + i, y) && !tyhjatNaapuritLista.contains(tx)) {
+                tyhjatNaapuritLista.add(tx);
+                tyhjatNaapurit(x + i, y);
+            }
+
+            if (tyhjaRuutu(x, y + i) && !tyhjatNaapuritLista.contains(ty)) {
+                tyhjatNaapuritLista.add(ty);
+                tyhjatNaapurit(x, y + i);
+            }
+        }
+    }
+
+    private boolean tyhjaRuutu(int x, int y) {
+        return rajojenSisalla(x, y) && pelilauta[x][y] == 0;
+    }
+
     public int[][] getPelilauta() {
         return pelilauta;
     }
@@ -104,7 +128,8 @@ public class Pelilauta {
         return laudanSivunPituus;
     }
 
-    public boolean lopetus() {
-        return true;
+    public HashSet<Koordinaatti> getTyhjatNaapurit(int x, int y) {
+        tyhjatNaapurit(x, y);
+        return tyhjatNaapuritLista;
     }
 }

@@ -3,8 +3,6 @@ package lagilabra.miinanlakaisija;
 public class Peli {
 
     private Pelilauta lauta;
-    private long aloitusAika;
-    private long lopetusAika;
 
     /**
      * Luodaan uusi Peli-olio.
@@ -30,17 +28,6 @@ public class Peli {
      */
     public void aloita(int x, int y) {
         lauta.aloitaPeli(x, y);
-        aloitusAika = System.currentTimeMillis();
-    }
-
-    /**
-     * Lopettaa pelin.
-     */
-    public void lopeta() {
-
-        if (lauta.lopetus()) {
-            lopetusAika = System.currentTimeMillis();
-        }
     }
 
     public Pelilauta getPelilauta() {

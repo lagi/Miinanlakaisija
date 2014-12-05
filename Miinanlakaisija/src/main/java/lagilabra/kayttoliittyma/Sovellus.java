@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lagilabra.kayttoliittyma;
 
 /**
@@ -11,6 +7,10 @@ package lagilabra.kayttoliittyma;
  */
 public class Sovellus {
 
+    /**
+     * Luo uuden Miinanlakaisija-käyttöliittymän ja käynnistää sen.
+     * @param args 
+     */
     public static void main(String[] args) {
         MiinanlakaisijaUI sovellus = new MiinanlakaisijaUI();
         sovellus.run();

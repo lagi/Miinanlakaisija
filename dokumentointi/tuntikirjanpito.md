@@ -39,3 +39,7 @@ Graafinen käyttöliittymä edistyy. Pelilauta alkaa olla valmis, paitsi jostain
 ## 4.12.2014, aikaa käytetty noin 4h
 
 Peli alkaa olla valmis. Lisätty vaikeusasteen valinta ja pelin häviäminen miinaa klikattaessa. Lisätty myös mahdollisuus myös aloittaa peli uudelleen. Vielä puuttuvat pelin voittaminen ja nolla-arvoista ruutua painettaessa viereisten ruutujen rekursiivinen paljastaminen, kunnes päädytään ei-nolla-arvoiseen ruutuun.
+
+## 5.12.2014, aikaa käytetty noin 5h
+
+Ruutujen rekursiivinen paljastaminen toimii jo lähes oikein. Ajanpuutteen vuoksi en ehtinyt saada peliä täysin valmiiksi tällä viikolla, mutta se on jo hyvässä demokunnossa. MiinanlakaisijaUI-luokka on nyt tupaten täynnä logiikkaa, ensi viikolla vuorossa vielä sen siistiminen ja logiikan erottaminen omaksi luokakseen.
