@@ -1,10 +1,9 @@
-
 package lagilabra.miinanlakaisija;
 
 public class Koordinaatti {
-    
+
     private final int x, y;
-    
+
     public Koordinaatti(int x, int y) {
         this.x = x;
         this.y = y;
@@ -16,6 +15,28 @@ public class Koordinaatti {
 
     public int getY() {
         return y;
+    }
+
+    /**
+     * Selvittää koordinaatti-parametrin x-koordinaatin.
+     *
+     * @param koordinaatti
+     * @return Koordinaatin x-koordinaatti.
+     */
+    public int getRivi(String koordinaatti) {
+        String out = koordinaatti.substring(0, koordinaatti.indexOf(','));
+        return Integer.parseInt(out);
+    }
+
+    /**
+     * Selvittää koordinaatti-parametrin y-koordinaatin.
+     *
+     * @param koordinaatti
+     * @return Koordinaatin y-koordinaatti.
+     */
+    public int getSarake(String koordinaatti) {
+        String out = koordinaatti.substring(koordinaatti.indexOf(',') + 1, koordinaatti.length());
+        return Integer.parseInt(out);
     }
 
     @Override
@@ -38,11 +59,12 @@ public class Koordinaatti {
         if (this.x != other.x) {
             return false;
         }
-        if (this.y != other.y) {
-            return false;
-        }
-        return true;
+        return this.y == other.y;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return getX() + "," + getY();
+    }
+
 }

@@ -1,4 +1,3 @@
-
 package lagilabra.kayttoliittyma;
 
 /**
@@ -9,7 +8,8 @@ public class Sovellus {
 
     /**
      * Luo uuden Miinanlakaisija-käyttöliittymän ja käynnistää sen.
-     * @param args 
+     *
+     * @param args
      */
     public static void main(String[] args) {
         MiinanlakaisijaUI sovellus = new MiinanlakaisijaUI();

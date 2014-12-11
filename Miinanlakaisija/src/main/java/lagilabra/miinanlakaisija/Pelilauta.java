@@ -1,8 +1,9 @@
 package lagilabra.miinanlakaisija;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class Pelilauta {
 
@@ -11,7 +12,11 @@ public class Pelilauta {
     private final int ruutujenMaara;
     private final int miinojenMaara;
     private final int laudanSivunPituus;
-    private HashSet<Koordinaatti> tyhjatNaapuritLista = new HashSet<>();
+    private int laskuri;
+
+    private final Koordinaatti koordinaatti = new Koordinaatti(0, 0);
+    private HashSet<Koordinaatti> tyhjatNaapuritListaApu = new HashSet<>();
+    private HashSet<Koordinaatti> avattavatRuudut = new HashSet<>();
 
     /**
      * Konstruktorissa luodaan pelilauta-taulukko oikean kokoiseksi, lasketaan
@@ -44,15 +49,15 @@ public class Pelilauta {
      * @see Pelilauta#asetaYmparoivienRuutujenArvot(int, int)
      */
     public void aloitaPeli(int ekaX, int ekaY) {
-        int laskuri = 0;
+        int apuLaskuri = 0;
         int x;
         int y;
-        while (laskuri < miinojenMaara) {
+        while (apuLaskuri < miinojenMaara) {
             x = random.nextInt(laudanSivunPituus);
             y = random.nextInt(laudanSivunPituus);
             if (pelilauta[x][y] != -1 && x != ekaX && y != ekaY) {
                 pelilauta[x][y] = -1;
-                laskuri++;
+                apuLaskuri++;
                 asetaYmparoivienRuutujenArvot(x, y);
             }
         }
@@ -88,26 +93,98 @@ public class Pelilauta {
         return !(x >= laudanSivunPituus || x < 0 || y >= laudanSivunPituus || y < 0);
     }
 
-    public void tyhjatNaapurit(int x, int y) {
+    /**
+     * Luo listan tyhjistä ruuduista.
+     *
+     * @param x
+     * @param y
+     */
+    private void tyhjatRuudut(int x, int y) {
         if (!tyhjaRuutu(x, y)) {
             return;
         }
-        System.out.println(x + " " + y);
         for (int i = -1; i < 2; i++) {
-            Koordinaatti tx = new Koordinaatti(x + i, y);
-            Koordinaatti ty = new Koordinaatti(x, y + i);
-            if (tyhjaRuutu(x + i, y) && !tyhjatNaapuritLista.contains(tx)) {
-                tyhjatNaapuritLista.add(tx);
-                tyhjatNaapurit(x + i, y);
-            }
-
-            if (tyhjaRuutu(x, y + i) && !tyhjatNaapuritLista.contains(ty)) {
-                tyhjatNaapuritLista.add(ty);
-                tyhjatNaapurit(x, y + i);
+            for (int j = -1; j < 2; j++) {
+                Koordinaatti tx = new Koordinaatti(x + i, y + j);
+                if (tyhjaRuutu(x + i, y + j) && !tyhjatNaapuritListaApu.contains(tx)) {
+                    tyhjatNaapuritListaApu.add(tx);
+                    tyhjatRuudut(x + i, y + j);
+                }
             }
         }
     }
 
+    /**
+     * Lisää tyhjien ruutujen naapurit listaan.
+     *
+     * @param x
+     * @param y
+     */
+    private void tyhjatNaapuritListanViimeistely(int x, int y) {
+        Koordinaatti apu = new Koordinaatti(x, y);
+        if (tyhjatNaapuritListaApu.contains(apu)) {
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    if (rajojenSisalla(x + i, y + j)) {
+                        avattavatRuudut.add(new Koordinaatti(x + i, y + j));
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Käy kaikki ruudut läpi ja tekee tarvittavan toiminnon, jos ruutu on
+     * tyhjä.
+     *
+     * @param x
+     * @param y
+     * @see
+     * lagilabra.kayttoliittyma.MiinanlakaisijaUI#actionPerformed(java.awt.event.ActionEvent)
+     */
+    private void laskeKaikkiNaapurit(int x, int y) {
+        tyhjatRuudut(x, y);
+        for (int i = 0; i < laudanSivunPituus; i++) {
+            for (int j = 0; j < laudanSivunPituus; j++) {
+                tyhjatNaapuritListanViimeistely(i, j);
+            }
+        }
+    }
+
+    /**
+     * Laskee avattujen ruutujen määrän jokaisen klikkauksen jälkeen.
+     *
+     * @param laudanRuudutPaneeli
+     * @see
+     * lagilabra.kayttoliittyma.MiinanlakaisijaUI#actionPerformed(java.awt.event.ActionEvent)
+     */
+    public void laskeAvatutRuudut(JPanel laudanRuudutPaneeli) {
+        laskuri = 0;
+        for (int i = 0; i < laudanRuudutPaneeli.getComponentCount(); i++) {
+            if (!laudanRuudutPaneeli.getComponent(i).isVisible()) {
+                laskuri++;
+            }
+        }
+    }
+
+    /**
+     * Kertoo oliko viimeinen klikattu ruutu miinan sisältävä ruutu.
+     *
+     * @param button: Klikattu ruutu
+     * @return true, jos ruudussa oli miina, muuten false
+     */
+    public boolean painoitkoMiinaa(JButton button) {
+        String koordinaatit = button.getName();
+        return pelilauta[koordinaatti.getRivi(koordinaatit)][koordinaatti.getSarake(koordinaatit)] == -1;
+    }
+
+    /**
+     * Kertoo ovatko koordinaatit pelilaudalla ja onko ruudun arvo 0.
+     *
+     * @param x
+     * @param y
+     * @return true, jos koordinaatit pelilaudalla ja arvo 0, muuten false
+     */
     private boolean tyhjaRuutu(int x, int y) {
         return rajojenSisalla(x, y) && pelilauta[x][y] == 0;
     }
@@ -128,8 +205,20 @@ public class Pelilauta {
         return laudanSivunPituus;
     }
 
+    public int getLaskuri() {
+        return laskuri;
+    }
+
+    /**
+     * Selvittää annetun ruudun tyhjät naapurit ja laskee niiden tyhjät naapurit
+     * rekursiivisesti.
+     *
+     * @param x
+     * @param y
+     * @return Lista avattavista ruuduista.
+     */
     public HashSet<Koordinaatti> getTyhjatNaapurit(int x, int y) {
-        tyhjatNaapurit(x, y);
-        return tyhjatNaapuritLista;
+        laskeKaikkiNaapurit(x, y);
+        return avattavatRuudut;
     }
 }
