@@ -43,3 +43,7 @@ Peli alkaa olla valmis. Lisätty vaikeusasteen valinta ja pelin häviäminen mii
 ## 5.12.2014, aikaa käytetty noin 5h
 
 Ruutujen rekursiivinen paljastaminen toimii jo lähes oikein. Ajanpuutteen vuoksi en ehtinyt saada peliä täysin valmiiksi tällä viikolla, mutta se on jo hyvässä demokunnossa. MiinanlakaisijaUI-luokka on nyt tupaten täynnä logiikkaa, ensi viikolla vuorossa vielä sen siistiminen ja logiikan erottaminen omaksi luokakseen.
+
+## 11.12.2014, aikaa käytetty noin 3h
+
+Ruutujen paljastaminen toimii ja pelin on lähes valmis. Lisäsin ratkaisun ajanoton, jonka alkuajankohta on vielä asetettava alkamaan ensimmäisen ruudun klikkauksesta. On myös vielä toteutettava ominaisuus, että ensimmäinen klikattu ruutu ei voi olla miina. Jos ehdin, niin parannan valikoita ja lisään toiminnon, jolla voidaan aloittaa uusi peli F2-näppäimestä. Testejä hieman lisätty. Kaikkea Pelilauta-luokan metodeja en oikein osannut testata, sillä ne menevät jo vähän grafiikan puolelle.

@@ -31,3 +31,19 @@ Huomasin pienen ongelman alustaLauta()-metodissa. Jos miinan sisältävän ruudu
 ## 21.11.2014, aikaa käytetty noin 2,5h
 
 Graafisen käyttöliittymän koodaaminen aloitettu. Grafiikan koodaaminen oli minulle aluksi hieman hidasta, sillä ainoat guit olen tehnyt ohjelmoinnin jatkokurssilla kaksi vuotta sitten. Myös ohjelman lopullinen runko alkaa muototua: lisäsin luokat MiinanlakaisijaUI ja Sovellus, joista jälkimmäinen on pääohjelma. Tein myös testit Peli-luokalle ja rivikattavuus onkin jo 100%, joskin testien laatua voi vielä hieman hioa.
+
+## 28.11.2014, aikaa käytetty noin 3h
+
+Graafinen käyttöliittymä edistyy. Pelilauta alkaa olla valmis, paitsi jostain syystä 8x8-laudalle ilmestyy 20 miinaa 10 sijasta, bugin syytä tutkitaan. Myös pieniä visible-ongelmia pelilaudassa. Logiikka vielä vähän kesken ja vaikeusasteen valitseminen puuttuu.
+
+## 4.12.2014, aikaa käytetty noin 4h
+
+Peli alkaa olla valmis. Lisätty vaikeusasteen valinta ja pelin häviäminen miinaa klikattaessa. Lisätty myös mahdollisuus myös aloittaa peli uudelleen. Vielä puuttuvat pelin voittaminen ja nolla-arvoista ruutua painettaessa viereisten ruutujen rekursiivinen paljastaminen, kunnes päädytään ei-nolla-arvoiseen ruutuun.
+
+## 5.12.2014, aikaa käytetty noin 5h
+
+Ruutujen rekursiivinen paljastaminen toimii jo lähes oikein. Ajanpuutteen vuoksi en ehtinyt saada peliä täysin valmiiksi tällä viikolla, mutta se on jo hyvässä demokunnossa. MiinanlakaisijaUI-luokka on nyt tupaten täynnä logiikkaa, ensi viikolla vuorossa vielä sen siistiminen ja logiikan erottaminen omaksi luokakseen.
+
+## 11.12.2014, aikaa käytetty noin 3h
+
+Ruutujen paljastaminen toimii ja pelin on lähes valmis. Lisäsin ratkaisun ajanoton, jonka alkuajankohta on vielä asetettava alkamaan ensimmäisen ruudun klikkauksesta. On myös vielä toteutettava ominaisuus, että ensimmäinen klikattu ruutu ei voi olla miina. Jos ehdin, niin parannan valikoita ja lisään toiminnon, jolla voidaan aloittaa uusi peli F2-näppäimestä. Testejä hieman lisätty. 
