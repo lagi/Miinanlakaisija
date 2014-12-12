@@ -47,3 +47,7 @@ Ruutujen rekursiivinen paljastaminen toimii jo lähes oikein. Ajanpuutteen vuoks
 ## 11.12.2014, aikaa käytetty noin 3h
 
 Ruutujen paljastaminen toimii ja pelin on lähes valmis. Lisäsin ratkaisun ajanoton, jonka alkuajankohta on vielä asetettava alkamaan ensimmäisen ruudun klikkauksesta. On myös vielä toteutettava ominaisuus, että ensimmäinen klikattu ruutu ei voi olla miina. Jos ehdin, niin parannan valikoita ja lisään toiminnon, jolla voidaan aloittaa uusi peli F2-näppäimestä. Testejä hieman lisätty. Kaikkea Pelilauta-luokan metodeja en oikein osannut testata, sillä ne menevät jo vähän grafiikan puolelle.
+
+## 12.12.2014, aikaa käytetty noin 2h
+
+Ohjelma on täysin toimintakunnossa lukuunottamatta graafista bugia, joka uskoakseni kuitenkin johtuu vain laitoksen koneiden Javan puutteellisuudesta. Javadoc kokonaisuudessaan luotu ja muu dokumentointi viimeistelty.

@@ -237,7 +237,7 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
     }
 
     /**
-     * Asettaa
+     * Asettaa listan painikkeet näkymättömiksi.
      *
      * @param viereiset
      */
