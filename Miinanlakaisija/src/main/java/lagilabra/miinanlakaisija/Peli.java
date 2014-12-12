@@ -24,7 +24,7 @@ public class Peli {
     }
 
     /**
-     * Aloittaa pelin.
+     * Aloittaa pelin ja ajanoton.
      *
      * @param x: ensimmäisen klikkauksen x-koordinaatti
      * @param y: ensimmäisen klikkauksen y-koordinaatti
@@ -33,19 +33,13 @@ public class Peli {
      */
     public void aloita(int x, int y) {
         lauta.aloitaPeli(x, y);
-    }
-
-    /**
-     * Aloittaa ajanoton.
-     */
-    public void aloitaAjanOtto() {
         aloitusAika = System.currentTimeMillis();
     }
 
     /**
      * Lopettaa ajanoton.
      */
-    public void lopetaAjanOtto() {
+    public void lopeta() {
         lopetusAika = System.currentTimeMillis();
     }
 

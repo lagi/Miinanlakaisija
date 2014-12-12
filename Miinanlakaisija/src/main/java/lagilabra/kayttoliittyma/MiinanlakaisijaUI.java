@@ -26,10 +26,11 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
 
     private JFrame frame;
     private JPanel ruudukkoPaneeli;
-    private JPanel laudanRuudutPaneeli;
+    private JPanel painikkeet;
+    private boolean peliAlkanut = false;
 
-    private JButton pelilauta[][];
-    private JTextField pelilauta2[][];
+    private JButton ruutuGrid[][];
+    private JTextField ruutujenArvot[][];
     private JButton ruutu;
     private JTextField ruudunArvo;
 
@@ -65,7 +66,6 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
-        peli.aloitaAjanOtto();
     }
 
     /**
@@ -77,8 +77,8 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
             "Keskivaikea: 16x16 ruutua",
             "Vaikea: 24x24 ruutua"};
         int n = JOptionPane.showOptionDialog(frame,
-                "Tervetuloa Miinanlakaisija-peliin. Kuinka hankalaa " +
-                 "haluat miinojen lakaisemisen olevan?",
+                "Tervetuloa Miinanlakaisija-peliin. Kuinka hankalaa "
+                + "haluat miinojen lakaisemisen olevan?",
                 "Miinanlakaisija",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -107,13 +107,13 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
      * @param container
      */
     private void luoKomponentit(Container container) {
-        pelilauta = new JButton[rivit][sarakkeet];
-        pelilauta2 = new JTextField[rivit][sarakkeet];
+        ruutuGrid = new JButton[rivit][sarakkeet];
+        ruutujenArvot = new JTextField[rivit][sarakkeet];
         JLayeredPane kerrosPane = new JLayeredPane();
 
         luoRuudukkoPaneeli();
         luoLaudanRuudutPaneeli();
-        kerrosPane.add(laudanRuudutPaneeli);
+        kerrosPane.add(painikkeet);
         kerrosPane.add(ruudukkoPaneeli);
         container.add(kerrosPane);
     }
@@ -125,11 +125,12 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
      * @return Paneeli, jossa klikattavat ruudut.
      */
     private void luoLaudanRuudutPaneeli() {
-        laudanRuudutPaneeli = new JPanel(new GridLayout(rivit, sarakkeet));
-        laudanRuudutPaneeli.setSize(new Dimension(rivit * sivunPituus, sarakkeet * sivunPituus));
+        painikkeet = new JPanel(new GridLayout(rivit, sarakkeet));
+        painikkeet.setSize(new Dimension(rivit * sivunPituus, sarakkeet * sivunPituus));
         luoLaudanRuudut();
-        laudanRuudutPaneeli.setOpaque(false);
-        laudanRuudutPaneeli.setVisible(true);
+        painikkeet.setOpaque(false);
+        painikkeet.setVisible(true);
+
     }
 
     /**
@@ -137,13 +138,13 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
      * lisätään ne paneeliin.
      */
     private void luoLaudanRuudut() {
-        for (int x = 0; x < pelilauta.length; x++) {
-            for (int y = 0; y < pelilauta[x].length; y++) {
-                pelilauta[x][y] = new JButton();
-                ruutu = pelilauta[x][y];
+        for (int x = 0; x < ruutuGrid.length; x++) {
+            for (int y = 0; y < ruutuGrid[x].length; y++) {
+                ruutuGrid[x][y] = new JButton();
+                ruutu = ruutuGrid[x][y];
                 ruutu.setSize(dimensio);
                 ruutu.setLocation(x * sivunPituus, y * sivunPituus);
-                laudanRuudutPaneeli.add(ruutu);
+                painikkeet.add(ruutu);
                 ruutu.addActionListener(this);
                 ruutu.setName(x + "," + y);
                 ruutu.setVisible(true);
@@ -162,34 +163,47 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
     private void luoRuudukkoPaneeli() {
         ruudukkoPaneeli = new JPanel(new GridLayout(rivit, sarakkeet));
         ruudukkoPaneeli.setSize(new Dimension(rivit * sivunPituus, sarakkeet * sivunPituus));
-        peli.aloita(random.nextInt(rivit), random.nextInt(sarakkeet));
-        luoRuudukko();
+        luoRuutujenArvotGrid();
     }
 
     /**
      * Luo ruudukon jo generoidun pelilaudan mukaiseksi.
      */
-    private void luoRuudukko() {
+    private void luoRuutujenArvotGrid() {
         for (int x = 0; x < rivit; x++) {
             for (int y = 0; y < sarakkeet; y++) {
-                pelilauta2[x][y] = new JTextField();
-                ruudunArvo = pelilauta2[x][y];
+                ruutujenArvot[x][y] = new JTextField();
+                ruudunArvo = ruutujenArvot[x][y];
                 ruudunArvo.setHighlighter(null);
                 ruudunArvo.setEditable(false);
                 ruudunArvo.setHorizontalAlignment(JTextField.CENTER);
-                if (peli.getPelilauta().getPelilauta()[x][y] == -1) {
-                    ruudunArvo.setText("●");
-                } else if (peli.getPelilauta().getPelilauta()[x][y] == 0) {
-                    ruudunArvo.setText("");
-                } else {
-                    ruudunArvo.setText(Integer.toString(peli.getPelilauta().getPelilauta()[x][y]));
-                }
-
                 ruudunArvo.setSize(dimensio);
                 ruudunArvo.setLocation(x * sivunPituus, y * sivunPituus);
                 ruudukkoPaneeli.add(ruudunArvo);
             }
         }
+    }
+
+    /**
+     * Asetetaan ruuduille arvot kun ensimmäinen klikkaus on suoritettu.
+     *
+     * @param x
+     * @param y
+     */
+    private void asetaRuutujenArvot(int x, int y) {
+        peli.aloita(x, y);
+        for (int i = 0; i < rivit; i++) {
+            for (int j = 0; j < sarakkeet; j++) {
+                if (peli.getPelilauta().getPelilauta()[i][j] == -1) {
+                    ruutujenArvot[i][j].setText("●");
+                } else if (peli.getPelilauta().getPelilauta()[i][j] == 0) {
+                    ruutujenArvot[i][j].setText("");
+                } else {
+                    ruutujenArvot[i][j].setText(Integer.toString(peli.getPelilauta().getPelilauta()[i][j]));
+                }
+            }
+        }
+
     }
 
     /**
@@ -206,44 +220,54 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
 
         int x = koordinaatti.getRivi(apuRuutu.getName());
         int y = koordinaatti.getSarake(apuRuutu.getName());
+        if (!peliAlkanut) {
+            asetaRuutujenArvot(x, y);
+            peliAlkanut = true;
+        }
 
         if (peli.getPelilauta().painoitkoMiinaa(apuRuutu)) {
             pelinHavio();
         } else {
             HashSet<Koordinaatti> viereiset = peli.getPelilauta().getTyhjatNaapurit(x, y);
             avaaViereisetRuudut(viereiset);
-            peli.getPelilauta().laskeAvatutRuudut(laudanRuudutPaneeli);
+            peli.getPelilauta().laskeAvatutRuudut(painikkeet);
             peliEtenee();
         }
+
     }
 
+    /**
+     * Asettaa
+     *
+     * @param viereiset
+     */
     private void avaaViereisetRuudut(HashSet<Koordinaatti> viereiset) {
         int x, y;
-        for (int i = 0; i < laudanRuudutPaneeli.getComponentCount(); i++) {
-            x = koordinaatti.getRivi(laudanRuudutPaneeli.getComponent(i).getName());
-            y = koordinaatti.getSarake(laudanRuudutPaneeli.getComponent(i).getName());
+        for (int i = 0; i < painikkeet.getComponentCount(); i++) {
+            x = koordinaatti.getRivi(painikkeet.getComponent(i).getName());
+            y = koordinaatti.getSarake(painikkeet.getComponent(i).getName());
             Koordinaatti apu = new Koordinaatti(x, y);
             if (viereiset.contains(apu)) {
-                laudanRuudutPaneeli.getComponent(i).setVisible(false);
+                painikkeet.getComponent(i).setVisible(false);
             }
         }
     }
 
     /**
-     * Kasvattaa laskuria aina, kun klikattu ruutu ei ole miina. Kun laskuri
-     * saavuttaa miinattomien ruutujen lukumäärän eli kun kaikki miinattomat
-     * ruudut on avattu, ilmoittaa pelaajalle voitosta ja kysyy haluaako tämä
-     * pelata uudelleen.
+     * Jos avattuja ruutuja laskeva laskuri saavuttaa ei-miinallisten ruutujen
+     * määrän, niin peli on läpäisty ja peli ilmoittaa pelaajalle voitosta.
      */
     private void peliEtenee() {
         if (peli.getPelilauta().getLaskuri() == peli.getPelilauta().getRuutujenMaara() - peli.getPelilauta().getMiinojenMaara()) {
-            peli.lopetaAjanOtto();
-            int n = JOptionPane.showOptionDialog(frame.getContentPane(), "Käytit tähän vain " + peli.kaytettyAika() + " sekuntia!\nHaluatko pelata uudelleen?", "Voitit pelin!", 0, JOptionPane.YES_NO_OPTION, null, vaihtoehdot, null);
+            peli.lopeta();
+            int n = JOptionPane.showOptionDialog(frame.getContentPane(), "Käytit tähän vain " + peli.kaytettyAika()
+                    + " sekuntia!\nHaluatko pelata uudelleen?", "Voitit pelin!", 0, JOptionPane.YES_NO_OPTION, null, vaihtoehdot, null);
             if (n == JOptionPane.NO_OPTION) {
                 System.exit(0);
             } else if (n == JOptionPane.YES_OPTION) {
                 frame.removeAll();
                 frame.dispose();
+                peliAlkanut = false;
                 run();
             } else if (n == JOptionPane.CLOSED_OPTION) {
                 System.exit(0);
@@ -256,15 +280,16 @@ public class MiinanlakaisijaUI implements Runnable, ActionListener {
      * kysyy, haluaako pelaaja pelata uudelleen.
      */
     private void pelinHavio() {
-        int m = JOptionPane.showOptionDialog(frame.getContentPane(), "Räjähdys sai " + irtoavat[random.nextInt(irtoavat.length)] + " " +
-                 irtoaminen[random.nextInt(irtoaminen.length)] + " ja lakaisijasi hajosi!" +
-                 " Haluatko " + korjaus[random.nextInt(korjaus.length)] + "\nirroneet osasesi, korjata lakaisijasi ja pelata uudelleen?",
+        int m = JOptionPane.showOptionDialog(frame.getContentPane(), "Räjähdys sai " + irtoavat[random.nextInt(irtoavat.length)] + " "
+                + irtoaminen[random.nextInt(irtoaminen.length)] + " ja lakaisijasi hajosi!"
+                + " Haluatko " + korjaus[random.nextInt(korjaus.length)] + "\nirroneet osasesi, korjata lakaisijasi ja pelata uudelleen?",
                 "Hävisit pelin!", 0, JOptionPane.YES_NO_OPTION, null, vaihtoehdot, null);
         if (m == JOptionPane.NO_OPTION) {
             System.exit(0);
         } else if (m == JOptionPane.YES_OPTION) {
             frame.removeAll();
             frame.dispose();
+            peliAlkanut = false;
             run();
         } else if (m == JOptionPane.CLOSED_OPTION) {
             System.exit(0);
